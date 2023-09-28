@@ -1,8 +1,8 @@
 import { useRef } from "react";
 import { FaCamera } from "react-icons/fa";
+import { ControllerRenderProps, FieldValues } from "react-hook-form";
 
 import Button from "../Button/Button";
-import { ControllerRenderProps, FieldValues } from "react-hook-form";
 
 interface FileFieldProps {
   field: ControllerRenderProps<FieldValues, string>;
@@ -10,11 +10,11 @@ interface FileFieldProps {
 }
 
 function FileField({ field, type }: FileFieldProps) {
-  const fileButton = useRef<HTMLInputElement | null>(null); // Specify the type of the ref
+  const fileButton = useRef<HTMLInputElement | null>(null);
 
   const onUploadButtonClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    if (fileButton.current) fileButton.current.click(); // Check for null before accessing click()
+    if (fileButton.current) fileButton.current.click();
   };
 
   return (
@@ -38,10 +38,9 @@ function FileField({ field, type }: FileFieldProps) {
         ref={fileButton}
       />
       {fileButton?.current?.files?.length ?? 0 > 0 ? (
-        // Check for null and access files safely
         // eslint-disable-next-line @next/next/no-img-element
         <img
-          className="object-cover w-8 h-8"
+          className="object-cover w-4 h-4"
           src={
             fileButton?.current?.files?.length
               ? URL.createObjectURL(fileButton.current.files[0])

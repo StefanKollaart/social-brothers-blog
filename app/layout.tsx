@@ -5,12 +5,12 @@ import "react-toastify/dist/ReactToastify.css";
 
 import Container from "@/ui/Container/Container";
 import Header from "@/features/Header/Header";
+import Footer from "@/ui/Footer/Footer";
 
 import { PostProvider } from "../context/PostContext";
+import { PageProvider } from "@/context/PageContext";
 
 import "./globals.css";
-import Footer from "@/ui/Footer/Footer";
-import { PageProvider } from "@/context/PageContext";
 
 const inter = Inter({ subsets: ["latin"] });
 

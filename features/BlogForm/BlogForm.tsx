@@ -2,10 +2,12 @@
 
 import { usePosts } from "@/context/PostContext";
 import useCategories from "@/hooks/useCategories";
-import { Category } from "@/types/Category";
-import { PostForm } from "@/types/Post";
+
 import Form from "@/ui/Form/Form";
 import SpinnerOrChildren from "@/ui/Spinner/SpinnerOrChildren";
+
+import { Category } from "@/types/Category";
+import { PostForm } from "@/types/Post";
 
 function BlogForm() {
   const postsContext = usePosts();

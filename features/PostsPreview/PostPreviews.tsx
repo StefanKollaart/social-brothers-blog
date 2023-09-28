@@ -1,11 +1,13 @@
 "use client";
 
-import PostPreviewItem from "./PostPreviewItem";
-import Button from "@/ui/Button/Button";
-import SpinnerOrChildren from "../../ui/Spinner/SpinnerOrChildren";
 import { useEffect } from "react";
+
 import { usePosts } from "@/context/PostContext";
-import ReactPaginate from "react-paginate";
+
+import PostPreviewItem from "./PostPreviewItem";
+import SpinnerOrChildren from "../../ui/Spinner/SpinnerOrChildren";
+import Pagination from "./Pagination";
+import Spinner from "@/ui/Spinner/Spinner";
 
 interface PostsPreviewsProps {
   perPage: number;
@@ -40,7 +42,6 @@ function PostsPreviews({
     setPaginationMode(paginationMode);
   });
 
-  // Define the callback function to handle page changes
   const handlePageChange = ({ selected }: { selected: number }) => {
     setPage(selected + 1);
   };
@@ -50,45 +51,30 @@ function PostsPreviews({
   if (posts) {
     return (
       <div className="flex flex-col justify-between h-full">
-        <SpinnerOrChildren isLoading={isLoading}>
-          <div className={`grid ${gridCols} gap-6 h-full`}>
-            {posts.map((post) => (
-              <PostPreviewItem
-                key={`post-preview-item-${post.id}`}
-                category={post.category}
-                title={post.title}
-                imgUrl={post.img_url}
-                date={post.created_at}
-                content={post.content}
-              />
-            ))}
-          </div>
-        </SpinnerOrChildren>
-
-        {paginationMode === "infinite-scroll" && (
-          <div className="mt-6 flex justify-center">
-            <SpinnerOrChildren isLoading={isLoading}>
-              <Button onClick={onLoadMoreClick}>Laad meer</Button>
-            </SpinnerOrChildren>
-          </div>
-        )}
-
-        {paginationMode !== "infinite-scroll" && (
-          <div className="mt-6 flex justify-center">
-            <ReactPaginate
-              previousLabel={""}
-              nextLabel={"Volgende pagina"}
-              breakLabel={"..."}
-              breakClassName={"break-me"}
-              pageCount={Math.ceil(total / perPage)}
-              onPageChange={handlePageChange}
-              containerClassName={"pagination"}
-              activeClassName={"active"}
+        <div className={`grid ${gridCols} gap-6 h-full`}>
+          {posts.map((post) => (
+            <PostPreviewItem
+              key={`post-preview-item-${post.id}`}
+              category={post.category}
+              title={post.title}
+              imgUrl={post.img_url}
+              date={post.created_at}
+              content={post.content}
             />
-          </div>
-        )}
+          ))}
+        </div>
+
+        <Pagination
+          paginationMode={paginationMode}
+          handlePageChange={handlePageChange}
+          pageCount={Math.ceil(total / perPage)}
+          isLoading={isLoading}
+          onLoadMoreClick={onLoadMoreClick}
+        />
       </div>
     );
+  } else {
+    <Spinner />;
   }
 }
 
