@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
+/* :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
@@ -24,4 +24,29 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+} */
+
+.pagination {
+  display: flex;
+  align-items: center;
+}
+
+.pagination li {
+  padding: 4px 12px 4px 12px;
+  font-size: 12px;
+}
+
+.pagination .previous {
+  display: none;
+}
+
+.pagination .active {
+  background-color: #e7e7e7;
+  border-radius: 13px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.pagination .next {
+  color: #f27623;
 }
